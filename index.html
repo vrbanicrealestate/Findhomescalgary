@@ -453,9 +453,8 @@
     </div>
     
     <script>
-<script>
         // PASTE YOUR GOOGLE APPS SCRIPT URL HERE (from Step 1)
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDlZkuMD4RkukE2G4seEJBAwFTDgl7eVrB7xsUrex8KfvxrYNydLW2siYgAdRAmTDinw/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXXXX/exec';
         
         document.getElementById('valuationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -475,8 +474,8 @@
                 source: 'Home Valuation Landing Page',
                 leadType: 'Seller',
                 timeline: 'ASAP',
-                campaign: 'Google Search - Buyer Landing Page',
-                adSet: 'Calgary Buyer landing'
+                campaign: 'Google ads',
+                adSet: 'Buyer landing page'
             };
             
             try {
@@ -487,7 +486,7 @@
                     body: JSON.stringify(formData)
                 });
                 
-                alert('?? Success! Check your email and I\'ll call you within the hour!');
+                alert('🎉 Success! Check your email and I\'ll call you within the hour!');
                 this.reset();
                 
             } catch (error) {
@@ -499,7 +498,10 @@
         });
     </script>
 </body>
+</html>
+</body>
 </html>    </script>
 </body>
 </html>
+
 
