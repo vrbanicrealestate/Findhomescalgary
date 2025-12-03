@@ -453,24 +453,18 @@
     </div>
     
 <script>
-    // Your N8N Webhook URL
-    const N8N_WEBHOOK_URL = 'https://findhomescalgary.app.n8n.cloud/webhook-test/lead-capture';
+    // N8N Webhook URL (LIVE)
+    const N8N_WEBHOOK_URL = "https://findhomescalgary.app.n8n.cloud/webhook/lead-capture";
 
-    console.log('Page loaded. Form handler ready.');
-    console.log('Webhook URL:', N8N_WEBHOOK_URL);
-    
     document.getElementById('buyerForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-        
-        console.log('✅ Form submitted!');
-        
+
         const submitBtn = this.querySelector('.submit-btn');
         const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
         submitBtn.textContent = 'Submitting...';
         submitBtn.style.opacity = '0.7';
-        
-        // Collect form data
+
         const formData = {
             neighborhoods: document.getElementById('neighborhoods').value,
             propertyType: document.getElementById('propertyType').value,
@@ -489,68 +483,36 @@
             utm_campaign: getURLParameter('utm_campaign') || 'none',
             utm_content: getURLParameter('utm_content') || 'none'
         };
-        
-        console.log('📤 Sending data:', formData);
 
         try {
             const response = await fetch(N8N_WEBHOOK_URL, {
                 method: 'POST',
-                mode: 'no-cors',    
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
             });
-            
-            console.log('✅ Request sent to n8n webhook');
-            
-            alert('🎉 Success! You\'re now on our exclusive list. I\'ll contact you within 1 hour with matching properties!');
-            
+
+            alert('🎉 Success! You’re now on our exclusive list. I will reach out shortly!');
             this.reset();
-            
         } catch (error) {
             console.error('❌ Error:', error);
-            alert('Thank you! Your home search request has been received. We\'ll be in touch shortly.');
+            alert('Thank you! Your request has been received.');
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;
             submitBtn.style.opacity = '1';
         }
     });
-    
+
     function getURLParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
     }
-    
-    // Track form engagement
-    let formStarted = false;
-    document.getElementById('buyerForm').addEventListener('input', function() {
-        if (!formStarted) {
-            formStarted = true;
-            console.log('👤 User started filling out form');
-        }
-    });
-    
-    // Phone formatting
-    const phoneInput = document.getElementById('phone');
-    phoneInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 0) {
-            if (value.length <= 3) {
-                value = '(' + value;
-            } else if (value.length <= 6) {
-                value = '(' + value.slice(0, 3) + ') ' + value.slice(3);
-            } else {
-                value = '(' + value.slice(0, 3) + ') ' + value.slice(3, 6) + '-' + value.slice(6, 10);
-            }
-        }
-        e.target.value = value;
-    });
-    
-    console.log('✅ All event listeners attached');
 </script>
+
 
 </body>
 </html>
+
 
